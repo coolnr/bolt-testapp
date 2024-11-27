@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Document {
+  id            String   @id @default(cuid())
+  fileName      String
+  fileType      String
+  fileSize      Int
+  originalUrl   String
+  jsonOutput    String
+  invoiceAmount Float?
+  processedAt   DateTime @default(now())
+  status        String   @default("pending") // pending, processing, completed, failed
+  error         String?
+}
